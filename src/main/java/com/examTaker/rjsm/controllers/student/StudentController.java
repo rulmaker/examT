@@ -26,10 +26,10 @@ public class StudentController {
         List<Student> students = studentService.getAllStudents();
 
         if(students.isEmpty()){
-            log.warn("There are no students registered");
+            log.warn("There are no students registered. From {}.",  this.getClass().getSimpleName());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existen estudiantes registrados");
         }else{
-            log.info("Student list generated succesfully");
+            log.info("Student list generated succesfully from {}.", this.getClass().getSimpleName());
             return ResponseEntity.ok(students);
         }
     }
@@ -41,10 +41,10 @@ public class StudentController {
         Optional<Student> student = studentService.getStudentById(id);
 
         if(student.isPresent()){
-            log.info("Returning student with id: {}", student.get().getStudent_id());
+            log.info("Returning student from {} with id: {}", this.getClass().getSimpleName(), student.get().getStudent_id());
             return ResponseEntity.ok(student.get());
         }else{
-            log.warn("Student with id: {}, not found.", student.get().getStudent_id());
+            log.warn("Student from {} with id: {}, not found.", this.getClass().getSimpleName(), student.get().getStudent_id());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Estudiante no encontrado");
         }
     }
@@ -54,7 +54,7 @@ public class StudentController {
     public ResponseEntity<Student> createStudent(@RequestBody Student student){
         Student studentSaved = studentService.createStudent(student);
 
-        log.info("Student with id: {} created.", studentSaved.getStudent_id());
+        log.info("Student from {} with id: {} created.", this.getClass().getSimpleName(), studentSaved.getStudent_id());
         return ResponseEntity.status(HttpStatus.CREATED).body(studentSaved);
 
     }
