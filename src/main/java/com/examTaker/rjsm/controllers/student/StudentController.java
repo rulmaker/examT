@@ -21,7 +21,7 @@ public class StudentController {
     }
 
     //get all
-    @GetMapping
+    @GetMapping  //http://localhost:9090/api/v1/product
     public ResponseEntity<?> getAll(){
         List<Student> students = studentService.getAllStudents();
 
@@ -36,7 +36,7 @@ public class StudentController {
 
 
     //get one
-    @GetMapping("/{id}")
+    @GetMapping("/{id}")  //http://localhost:9090/api/v1/product/{}
     public ResponseEntity<?> getStudentbyId(@PathVariable Long id){
         Optional<Student> student = studentService.getStudentById(id);
 
@@ -50,7 +50,7 @@ public class StudentController {
     }
 
     //create
-    @PostMapping
+    @PostMapping  //http://localhost:9090/api/v1/product
     public ResponseEntity<Student> createStudent(@RequestBody Student student){
         Student studentSaved = studentService.createStudent(student);
 
