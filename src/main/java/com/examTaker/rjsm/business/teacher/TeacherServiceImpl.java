@@ -3,6 +3,7 @@ package com.examTaker.rjsm.business.teacher;
 import java.util.List;
 import java.util.Optional;
 
+import com.examTaker.rjsm.business.student.StudentRepository;
 import com.examTaker.rjsm.models.Teacher;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +12,15 @@ import org.springframework.stereotype.Service;
 @Service
 @Log4j2
 public class TeacherServiceImpl implements TeacherService{
+    private final StudentRepository studentRepository;
 
     private final TeacherRepository teacherRepository;
 
     @Autowired
-    public TeacherServiceImpl(TeacherRepository teacherRepository){
+    public TeacherServiceImpl(TeacherRepository teacherRepository,
+                              StudentRepository studentRepository){
         this.teacherRepository = teacherRepository;
+        this.studentRepository = studentRepository;
     }
 
     //get all
@@ -33,8 +37,9 @@ public class TeacherServiceImpl implements TeacherService{
 
     //create
     public Teacher saveTeacher(Teacher teacher){
-        log.info("Teacher saved with Id: {} from {}.", teacher.getTeacher_id(), this.getClass().getSimpleName());
-        return teacherRepository.save(teacher);
+        Teacher teacherSaved = teacherRepository.save(teacher);
+        log.info("Teacher saved with Id: {} from {}.", teacherSaved.getTeacher_id(), this.getClass().getSimpleName());
+        return teacherSaved;
     }
 
     //delete
