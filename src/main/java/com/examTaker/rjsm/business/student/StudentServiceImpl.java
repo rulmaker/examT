@@ -20,22 +20,27 @@ public class StudentServiceImpl implements StudentService {
     }
 
     public List<Student> getAllStudents(){
+        log.info("Returning all students from {}.", this.getClass().getSimpleName());
         return studentRepository.findAll();
     }
 
     public Optional<Student> getStudentById(Long id){
+        log.info("Returning student with id: {} from {}.", id, this.getClass().getSimpleName());
         return studentRepository.findById(id);
     }
 
     public Student createStudent(Student student){
+        log.info("Student saved with Id: {} from {}.", student.getStudent_id(), this.getClass().getSimpleName());
         return studentRepository.save(student);
     }
 
     public boolean deleteStudent(Long id){
         try{
             studentRepository.deleteById(id);
+            log.info("Student with Id: {} deleted. From {}.", id, this.getClass().getSimpleName());
             return true;
         }catch(Exception e){
+            log.warn("Student with id: {} couldn't be deleted. Form {}.", id, this.getClass().getSimpleName());
             return false;
         }
     }
