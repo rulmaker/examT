@@ -48,12 +48,12 @@ public class TeacherController {
     public ResponseEntity<?> getTeacherbyId(@PathVariable Long id){
         Optional<Teacher> teacher = teacherService.getTeacherById(id);
 
-        if(teacher.isPresent()){
+        if(teacher.isEmpty()){
+            log.warn("Teacher from {} with id: {}, not found.", this.getClass().getSimpleName(), id);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Teacher was not found");
+        }else{
             log.info("Returning teacher from {} with id: {}", this.getClass().getSimpleName(), teacher.get().getTeacher_id());
             return ResponseEntity.ok(teacher.get());
-        }else{
-            log.warn("Teacher from {} with id: {}, not found.", this.getClass().getSimpleName(), teacher.get().getTeacher_id());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Teacher was not found");
         }
     }
 
