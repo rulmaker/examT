@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.examTaker.rjsm.models.Teacher;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +14,7 @@ public class TeacherServiceImpl implements TeacherService{
 
     private final TeacherRepository teacherRepository;
 
+    @Autowired
     public TeacherServiceImpl(TeacherRepository teacherRepository){
         this.teacherRepository = teacherRepository;
     }
