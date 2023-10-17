@@ -30,8 +30,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     public Student createStudent(Student student){
-        log.info("Student saved with Id: {} from {}.", student.getStudent_id(), this.getClass().getSimpleName());
-        return studentRepository.save(student);
+        Student studentsaved = studentRepository.save(student);
+        log.info("Student saved with Id: {} from {}.", studentsaved.getStudent_id(), this.getClass().getSimpleName());
+        return studentsaved;
     }
 
     public boolean deleteStudent(Long id){
