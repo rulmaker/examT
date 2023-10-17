@@ -16,6 +16,7 @@ import javax.persistence.Column;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -27,7 +28,7 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @Column(nullable = false, name = "id")
     private Long student_id;
 
     @Column(name="name", nullable = false, columnDefinition = "VARCHAR(100)")
@@ -43,8 +44,8 @@ public class Student {
     private int grade;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "birth_date")
-    private Date birthDate;
+    @Column(name = "birth_date", updatable = false, nullable = false)
+    private Calendar birthDate;
 
     @Column(name = "profile_created")
     @CreationTimestamp
