@@ -7,7 +7,7 @@ plugins {
 //Future### branch >>> dev
 //Release### branch >>> master
 //Tagging
-version= '0.0.1'
+version= '0.1.0-SNAPSHOT'
 group = 'com.exam_taker'
 
 java {
