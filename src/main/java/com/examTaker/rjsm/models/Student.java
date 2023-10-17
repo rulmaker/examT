@@ -1,11 +1,20 @@
 package com.examTaker.rjsm.models;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.EntityListeners;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -13,8 +22,6 @@ import java.util.Date;
 @Table(name="student")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class Student {
 
@@ -26,16 +33,24 @@ public class Student {
     @Column(name="name", nullable = false, columnDefinition = "VARCHAR(100)")
     private String name;
 
-    @Column(name="email", nullable = false, columnDefinition = "VARCHAR(255)")
+    @Column(name="email", nullable = false, columnDefinition = "VARCHAR(100)")
     private String email;
+
+    @Column(name = "last_name", nullable = false, columnDefinition = "VARCHAR(100)")
+    private String lastName;
 
     @Column(name="grade", nullable = false, columnDefinition = "INT")
     private int grade;
 
-    @Column(name = "profilecreated")
+    @Temporal(TemporalType.DATE)
+    @Column(name = "birth_date")
+    private Date birthDate;
+
+    @Column(name = "profile_created")
     @CreationTimestamp
     private LocalDateTime profileCreated;
 
+    @Column(name = "last_modification")
     @LastModifiedDate
     private Date lastModification;
 
